@@ -128,7 +128,7 @@ public abstract class AbstractClickhouseLoaderMapper<KEYIN, VALUEIN, KEYOUT, VAL
     @Override
     protected void map(KEYIN key, VALUEIN value, Context context) throws IOException, InterruptedException {
         try{
-            rowRecordDecoder.setRowRecord(key, value);
+            rowRecordDecoder.setRowRecord(key, value);//把输入一行数据进行转换
             write(key, readRowRecord(rowRecordDecoder, context), context);
         }catch(IllegalFormatException e){
             log.error(e.getMessage(), e);

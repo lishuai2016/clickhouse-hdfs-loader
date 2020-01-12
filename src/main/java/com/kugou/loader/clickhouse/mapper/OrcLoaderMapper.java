@@ -24,7 +24,7 @@ public class OrcLoaderMapper extends AbstractClickhouseLoaderMapper<NullWritable
     private final static Logger logger = LoggerFactory.getLogger(OrcLoaderMapper.class);
 
 
-    @Override
+    @Override//输入数据处理
     public RowRecordDecoder<NullWritable, OrcStruct> getRowRecordDecoder(Configuration config) {
         return new DefaultRowRecordDecoder<>(config, new OrcRecordDecoder(new ClickhouseConfiguration(config)));
     }

@@ -8,7 +8,7 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.orc.mapred.OrcStruct;
 
 /**
- * Created by jaykelin on 2017/4/5.
+ * Created by jaykelin on 2017/4/5. 【解析出一行中的多个字段】
  */
 public class OrcRecordDecoder extends RecordDecoderConfigurable<NullWritable,OrcStruct> {
 
@@ -33,12 +33,12 @@ public class OrcRecordDecoder extends RecordDecoderConfigurable<NullWritable,Orc
         this.key = key;
         this.value = value;
         this.currentIndex = 0;
-        this.totalFields = value.getNumFields();
+        this.totalFields = value.getNumFields();//一行有多少列数据
     }
 
     @Override
     public String next() {
-        synchronized (currentIndex){
+        synchronized (currentIndex){//获取一个字段的值
             Object val = value.getFieldValue(currentIndex++);
             return val == null?null:val.toString();
         }
